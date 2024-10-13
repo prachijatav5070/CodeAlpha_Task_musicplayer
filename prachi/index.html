@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="container">
+
+        <!-- <header class="wrapper">
+            <button id="btn1"><i class="fa-solid fa-circle-arrow-left"></i></button>
+            <h4>PLAYING NOW</h4>
+            <button id="btn2"><i class="fa-solid fa-bars-staggered"></i></button>
+        </header> -->
+
+
+        <div class="player">
+
+            <div class="song_details">
+                <h1 id="songTitle">Song</h1>
+            </div>
+
+        </div>
+
+
+        <div class="songs">
+            <audio id="audio-player" src=""></audio>
+        </div>
+
+
+        <div class="controls">
+            <button id="btn2">
+                <i class="fa-solid fa-backward-step fa-2xl"></i>
+            </button>
+
+            <button id="btn3">
+                <i id="playbtn3" class="fa-regular fa-circle-play fa-2xl"></i>
+                <i id="pausebtn3" class="fa-solid fa-pause fa-2xl"></i>
+            </button>
+
+            <button id="btn4">
+                <i class="fa-solid fa-forward-step fa-2xl"></i>
+            </button>
+        </div>
+
+
+    </section>
+
+
+
+    <script>
+          const songs = [
+    { src: '02 - Thumka.mp3', title: 'Thumka' },
+    { src: '02 Kamariya.mp3', title: 'Kamariya' },
+    { src: '04 - Chal Mere Ghar.mp3', title: 'Chal Mere Ghar' },
+    { src: '02 - Samjhawan.mp3', title: 'Samjhawan' },
+    { src: '04 - Dua Karo.mp3', title: 'Dua Karo' },
+    { src: 'Chaar Shanivaar.mp3', title: 'Chaar Shanivaar' },
+    { src: 'Chahun Main Ya Naa.mp3', title: 'Chahun Main Ya Naa' },
+    { src: 'Challa Main Lad Jaana.mp3', title: 'Challa Main Lad Jaana' },
+    { src: 'Chalte Chalte.mp3', title: 'Chalte Chalte' },
+    { src: 'Chamba.mp3', title: 'Chamba' }
+    ];
+
+
+        let audioPlayer = document.getElementById("audio-player");
+        let songTitle = document.getElementById("songTitle");
+        //to access array value one by one
+        let currentSongIndex = 0;
+
+        function loadSongs(i) {
+
+            audioPlayer.src = songs[i].src;
+            songTitle.textContent = songs[i].title;
+
+        }
+
+
+        let play = document.getElementById("playbtn3");
+        let pause = document.getElementById("pausebtn3");
+
+        document.getElementById("btn3").addEventListener("click", () => {
+            if (audioPlayer.src === "")
+             {
+
+                loadSongs(currentSongIndex);
+            }
+            if (audioPlayer.paused)
+             {
+                audioPlayer.play();
+                play.style.display = "none";
+                pause.style.display = "inline-block";
+            }
+            else
+            {
+                audioPlayer.pause();
+                play.style.display = "inline-block";
+                pause.style.display = "none";
+            }
+        })
+
+        //forward
+        document.getElementById("btn4").addEventListener("click", () => {
+            currentSongIndex = currentSongIndex + 1;
+            loadSongs(currentSongIndex);
+            audioPlayer.play();
+        })
+
+
+        //backward
+        document.getElementById("btn2").addEventListener("click", () => {
+            currentSongIndex = currentSongIndex - 1;
+            loadSongs(currentSongIndex);
+            audioPlayer.play();
+        })
+
+        loadSongs(currentSongIndex);
+    </script>
+</body>
+
+</html>
